@@ -7,11 +7,11 @@ from tkinter import messagebox
 class Supermarket_Billing:
 	def __init__(self,root):
 		self.root=root
-		self.root.title("Super Market Billing System")
+		self.root.title("Super Market Billing Calculation System")
 		self.root.configure(bg="white")
 		self.root.iconbitmap('bag_icon.ico')
 		self.root.geometry("1300x1000+100+0")
-		title=Label(self.root,text="SUPERMARKET  BILLING  SYSTEM",bg="pink",fg="crimson",font=("Alice",30,"bold"),pady=2,bd=8,relief=GROOVE).pack(fill=X)
+		title=Label(self.root,text="SUPERMARKET  BILLING  CALCULATION  SYSTEM",bg="pink",fg="crimson",font=("Alice",30,"bold"),pady=2,bd=8,relief=GROOVE).pack(fill=X)
 		frame_1=LabelFrame(self.root,text="Customer Details",fg="crimson",bg="pink",font=("Times New Roman",15,"bold"),bd=10)
 		frame_1.place(x=1,y=70,relwidth=1)
 
@@ -47,13 +47,14 @@ class Supermarket_Billing:
 		self.personal_care_cost=IntVar()
 		self.homecare_cost=IntVar()
 		self.total_money=IntVar()
+		self.total_amount=StringVar()
 
 		self.gst1=IntVar()
 		self.gst2=IntVar()
 		self.gst3=IntVar()
 		self.gst4=IntVar()
 
-		#         MY ENTRIES
+		#         VARIABLES FOR MY ENTRIES
 		self.myemail=StringVar()
 		self.mob=StringVar()
 		self.bill_username=StringVar()
@@ -65,7 +66,8 @@ class Supermarket_Billing:
 		
 
         
-		user_email=Label(frame_1,text="Email Id",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink").grid(row=0,column=0)
+        #---CUSTOMER INFORMATION---
+		user_name=Label(frame_1,text="Email Id",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink").grid(row=0,column=0)
 		email_entry=Entry(frame_1,textvariable=self.myemail,width=18,font=("arial",15),bd=5,relief=SUNKEN).grid(row=0,column=1,pady=5,padx=5)
 
 		user_number=Label(frame_1,text="Mobile Number",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink").grid(row=0,column=2)
@@ -78,7 +80,7 @@ class Supermarket_Billing:
 		name_entry=Entry(frame_1,textvariable=self.bill_username,width=18,font=("arial",15),bd=5,relief=SUNKEN).grid(row=0,column=7,pady=5,padx=5)
 
 
-		#------------FOOD FRAME--------
+		#------------FOOD FRAME 1--------
 		frame_2=LabelFrame(self.root,text="FOOD",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_2.place(x=10,y=180,width=205,height=250)
         
@@ -100,7 +102,7 @@ class Supermarket_Billing:
 		buiscuits=Label(frame_2,text="Oreo (Rs25/-)",font=("Times New Roman",11,"bold"),fg="crimson",bg="pink",bd=5,padx=5,pady=5).grid(row=6,column=0,sticky="W")
 		buiscuits_quantity=Entry(frame_2,textvariable=self.oreo,font=("Times New Roman",10,"bold"),bd=5,width=3,relief=SUNKEN).grid(row=6,column=1)
 
-		#------BILLING AREA------
+		#------BILLING AREA- OR  SETTING THE TEXTFIELD-----
 		frame_3=Frame(self.root,relief=GROOVE,bd=8,bg="crimson")
 		frame_3.place(x=425,y=180,width=450,height=347)
 		bill_head=Label(frame_3,text="BILL GENERATION",font=("Times New Roman",14,"bold")).pack(fill=X)
@@ -111,7 +113,7 @@ class Supermarket_Billing:
 		self.textplace.pack(fill=BOTH,expand=1)
 
 
-		#------BEVERAGES--------
+		#------BEVERAGES FRAME 2--------
 		frame_4=LabelFrame(self.root,text="BEVERAGES",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_4.place(x=220,y=180,width=203,height=250)
 
@@ -134,7 +136,7 @@ class Supermarket_Billing:
 		horlicks_quantity=Entry(frame_4,textvariable=self.horlicks,font=("Times New Roman",10,"bold"),bd=5,width=3
 			,relief=SUNKEN).grid(row=5,column=1)
 
-		#--------PERSONAL CARE PRODUCTS FRAME-------
+		#--------PERSONAL CARE PRODUCTS FRAME 3-------
 		frame_6=LabelFrame(self.root,text="PERSONAL CARE",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_6.place(x=880,y=180,width=205,height=250)
 
@@ -156,7 +158,7 @@ class Supermarket_Billing:
 		sanitizer=Label(frame_6,text="Sanitizer (Rs10/-)",font=("Times New Roman",11,"bold"),fg="crimson",bg="pink",bd=5,padx=5,pady=5).grid(row=5,column=0,sticky="W")
 		sanitizer_quantity=Entry(frame_6,textvariable=self.sanitizer,font=("Times New Roman",10,"bold"),bd=5,width=3,relief=SUNKEN).grid(row=5,column=1)
 
-		#-----------HOME CARE PRODUCTS-----------
+		#-----------HOME CARE PRODUCTS FRAME 4-----------
 		frame_7=LabelFrame(self.root,text="HOME CARE",font=("Times New Roman",13,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_7.place(x=1090,y=180,width=200,height=250)
 
@@ -178,7 +180,7 @@ class Supermarket_Billing:
 		rin=Label(frame_7,text="Rin Bar (Rs10/-)",font=("Times New Roman",11,"bold"),fg="crimson",bg="pink",bd=5,padx=5,pady=5).grid(row=5,column=0,sticky="W")
 		rin_quantity=Entry(frame_7,textvariable=self.rin,font=("Times New Roman",10,"bold"),bd=5,width=3,relief=SUNKEN).grid(row=5,column=1)
 
-		#------BILLING FRAME 1-----
+		#------BILLING FRAME 1   (TOTAL COST FOR EACH ITEM FRAME)-----
 
 		frame_8=LabelFrame(self.root,text="BILLING",font=("Times New Roman",15,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_8.place(x=10,y=515,width=410,height=270)
@@ -218,7 +220,8 @@ class Supermarket_Billing:
 		frame_9=LabelFrame(self.root,text="BILLING",font=("Times New Roman",15,"bold"),fg="crimson",bg="pink",bd=5)
 		frame_9.place(x=885,y=510,width=410,height=275)
 
-		 #------right bottom framee----
+		
+		#------right bottom framee containing all the buttons----
 		my_buttons=Frame(frame_9,bd=5,relief=GROOVE)
 		my_buttons.place(x=10,y=2,width=380,height=230)
 
@@ -229,7 +232,7 @@ class Supermarket_Billing:
 		b1=Button(my_buttons,command=self.total,bd=3,text="Total",fg="white",bg="crimson",pady=5,font=("Times New Roman",15,"bold"),width=10,height=1)
 		b1.place(x=10,y=50)
 
-		b2=Button(my_buttons,command=self.konoha_bill2,bd=3,text="Create Bill",fg="white",bg="crimson",pady=5,font=("Times New Roman",15,"bold"),width=10,height=1)
+		b2=Button(my_buttons,command=self.bill2,bd=3,text="Create Bill",fg="white",bg="crimson",pady=5,font=("Times New Roman",15,"bold"),width=10,height=1)
 		b2.place(x=225,y=50)
 
 		b3=Button(my_buttons,command=self.reset_info,bd=3,text="Reset",fg="white",bg="crimson",pady=5,font=("Times New Roman",15,"bold"),width=10,height=1)
@@ -251,7 +254,7 @@ class Supermarket_Billing:
 		shopping2.place(x=108,y=15)
 
 		
-
+    #-------TOTAL BUTTON   (CALCULATION)------
 	def total(self):
 		self.pulse1=self.pulse.get()
 		self.rice1=self.rice.get()
@@ -324,16 +327,20 @@ class Supermarket_Billing:
 
 		self.total_money.set(str(self.total_rs)) 
 
-	def konoha_bill2(self):
-		self.textplace.insert(END,"\t----------Kohona Supermarket------------")
+		self.total_amount=self.total_money.get()
+    
+
+    #-----DISPLAYING BILL AND THE CUSTOMER INFO ON THE TEXTFIELD-----
+	def bill2(self):
+		self.textplace.insert(END,"\t----------My Supermarket------------")
 		self.textplace.insert(END,f"\n                 ******WELCOME******")
 		self.textplace.insert(END,f"\n                Contact : 7833449010")
-		self.textplace.insert(END,f"\n                Email : market@gmail.com")
+		self.textplace.insert(END,f"\n                Email : supermarket@gmail.com")
 		self.textplace.insert(END,"\n***************************************************")
-		self.textplace.insert(END,f"\n             BILL NUMBER      {self.bill_nosearch.get()}")
-		self.textplace.insert(END,f"\n             EMAIL ID         {self.myemail.get()}")
-		self.textplace.insert(END,f"\n             MOBILE NUMBER    {self.mob.get()}")
-		self.textplace.insert(END,f"\n             YOUR NAME        {self.bill_username.get()}")
+		self.textplace.insert(END,f"\n          BILL NUMBER    {self.bill_nosearch.get()}")
+		self.textplace.insert(END,f"\n          EMAIL ID       {self.myemail.get()}")
+		self.textplace.insert(END,f"\n          MOBILE NUMBER  {self.mob.get()}")
+		self.textplace.insert(END,f"\n          YOUR NAME      {self.bill_username.get()}")
 		self.textplace.insert(END,f"\n**WELCOME*****WELCOME*****WELCOME*****WELCOME*****")
 		self.textplace.insert(END,f"\n   \tITEMS \t\tQUANTITY  \t\tCOST")
 		self.textplace.insert(END,f"\n---------------------------------------------------")
@@ -379,7 +386,9 @@ class Supermarket_Billing:
 			self.textplace.insert(END,f"\n   \tTide\t\t{self.surf1}  \t\t{self.surf1 * 50}")
 		if self.rin1!=0:
 			self.textplace.insert(END,f"\n   \tRin Bar\t\t{self.rin1}  \t\t{self.rin1 * 10}")
-
+		self.textplace.insert(END,f"\n   \tTOTAL AMOUNT\t\t----   \t\t{self.total_amount}")
+    
+    #-----RESETS ALL THE ENTRY FIELD-----
 	def reset_info(self):
 		self.pulse.set(0)
 		self.rice.set(0)
@@ -416,9 +425,10 @@ class Supermarket_Billing:
 		self.gst3.set(0)
 		self.gst4.set(0)
 
-		#         MY ENTRIES
+		#         MY  CUSTOMER INFORMATION ENTRIES
 		self.myemail.set("")
 		self.mob.set("")
+		self.bill_username.set("")
 		self.bill_nosearch=StringVar("")
 		ran=random.randint(1000,9999)
 		self.bill_nosearch.set(str(ran))
@@ -436,6 +446,7 @@ class Supermarket_Billing:
 
 root=Tk()
 root.resizable(False,False)
+# ----ADDIND IMAGE TO OUR ROOT WINDOW-----
 amul_image=ImageTk.PhotoImage(Image.open("market.jpeg"))
 bgimage=Label(image=amul_image,width=445,height=250)
 bgimage.place(x=428,y=530)
